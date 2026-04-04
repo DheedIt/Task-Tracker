@@ -2,8 +2,8 @@ import sys
 from ent import Task
 def inputProcessor(args):
  options = {
-  "add": lambda: add(args[1])
-  # "update"
+  "add": lambda: add(args[1:]),
+  "update": lambda: update(args[1:])
   # "delete"
   # "list"
   # "mark-in-progress"
@@ -20,7 +20,9 @@ def add(name):
  
 
 def update(name):
- return Task(1,name)
+ res = Task(1,name)
+ print("Обновился")
+ return res
 
 def delete(name):
  return Task(1,name)
