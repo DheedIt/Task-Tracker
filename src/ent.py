@@ -1,7 +1,10 @@
+from datetime import date
+
+
 class Task:  
-    def __init__(self,id,escription,status,createdAt,updateAt):
+    def __init__(self,id,description, status = ""):
         self.id = id
-        self.escription = escription
+        self.description = description
         self.status = status
-        self.createdAt = createdAt
-        self.updateAt = updateAt
+        self.createdAt = date.today()
+        self.updateAt = date.today()
