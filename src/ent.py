@@ -1,17 +1,10 @@
-from sqlite3 import Date
+from datetime import date
 
 
 class Task:  
-    def __init__(self,id,escription,status,createdAt,updateAt):
+    def __init__(self,id,description, status = ""):
         self.id = id
-        self.escription = escription
+        self.description = description
         self.status = status
-        self.createdAt = createdAt
-        self.updateAt = updateAt
-        
-    def __init__(self,id,description):
-        self.id = id
-        self.escription = description
-        self.status = ""
-        self.createdAt = Date.today()
-        self.updateAt = Date.today()
+        self.createdAt = date.today()
+        self.updateAt = date.today()
