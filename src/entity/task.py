@@ -1,5 +1,6 @@
 from datetime import date
 import json
+from typing import List
 
 
 class Task:  
@@ -19,3 +20,8 @@ class Task:
             data: Task = json.load(file)
             print(f'{data}')
         return self
+    @staticmethod
+    def getLastId() -> int:
+        with open('jsonVault/tasks.json', 'r', encoding='utf-8') as file:
+            data: List[Task] = json.load(file)
+        return data[-1].id
