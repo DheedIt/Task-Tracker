@@ -23,25 +23,26 @@ class Task:
                 except json.JSONDecodeError:
                     print("Ошибка чтения!")
                     return
-        tasks.append(self.to_dict())
-        with open(path, 'w', encoding='utf-8') as file:
-           json.dump(tasks, file, indent=4, ensure_ascii=False)
+            tasks.append(self.to_dict())
+            with open(path, 'w', encoding='utf-8') as file:
+                json.dump(tasks, file, indent=4, ensure_ascii=False)
     @staticmethod
     def getLastId() -> int:
-        with open(path, 'r', encoding='utf-8') as file:
-            data: List[dict[str,Any]] = json.load(file)
-            id:int = -1
-            if not data:
-                return 1
-            try:
+        id:int = -1
+        try:
+            with open(path, 'r', encoding='utf-8') as file:
+                data: List[dict[str,Any]] = json.load(file)
+                if not data:
+                    return 1
+            
                 item:str = data[-1].get('id', "-1")
                 id: int = int(item)
                 if(id == -1):
                     raise TaskNotFoundError(Exception)
                 return id
-            except:
-                print('Ошибка преобразования id из str в int')
-            return id #Тут ошибка что отсутствует id. Найди способ вытащить его
+        except:
+            print('Ошибка преобразования id из str в int')
+        return id #Тут ошибка что отсутствует id. Найди способ вытащить его
     
     def to_dict(self) -> dict[str,Any]:
         return {
