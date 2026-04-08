@@ -26,12 +26,6 @@ class Task:
         tasks.append(self.to_dict())
         with open(path, 'w', encoding='utf-8') as file:
            json.dump(tasks, file, indent=4, ensure_ascii=False)
-        
-    def load(self,id:int) -> Task:
-        with open(path, 'r', encoding='utf-8') as file:
-            data: Task = json.load(file)
-            print(f'{data}')
-        return self
     @staticmethod
     def getLastId() -> int:
         with open(path, 'r', encoding='utf-8') as file:
