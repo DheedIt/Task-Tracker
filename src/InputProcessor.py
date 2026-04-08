@@ -1,11 +1,11 @@
-from typing import List
+from typing import Any, List
 from src.entity.task import Task
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
 
 def inputProcessor(args:List[str]) -> None:
- options = {
+ options: dict[str, Any] = {
   "add": lambda: add(args[1:]),
   "update": lambda: update(args[2]),
   "delete": lambda: delete(args[2]),
@@ -27,7 +27,7 @@ def add(name: List[str]):
  return res
  
 
-def update(id: str):
+def update(id: str, ):
  res = Task(1,id)
  print("Обновился")
  return res
