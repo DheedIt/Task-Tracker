@@ -40,6 +40,20 @@ class Task:
             print(allTasks)
 
     @staticmethod
+    def listInProgres():
+        tasks:List[dict[str,Any]] = []
+        if(BASE_DIR.exists()):
+            with open(path, 'r', encoding='utf-8') as file:
+                try:
+                    tasks = json.load(file)
+                except json.JSONDecodeError:
+                    print("Ошибка чтения!")
+                    return
+            print(tasks)
+            allTasks = [item.get("description") for item in tasks if "description" in item and item.get("status") != "Already"]
+            print(allTasks)
+
+    @staticmethod
     def listCompletingTask():
         tasks:List[dict[str,Any]] = []
         if(BASE_DIR.exists()):
@@ -50,9 +64,9 @@ class Task:
                     print("Ошибка чтения!")
                     return
             print(tasks)
-            allTasks = [item['description'] for item in tasks if item['status'] == "Аlready"]
+            allTasks = [item.get("description") for item in tasks if "description" in item and item.get("status") == "Already"]
             print(allTasks)
-
+#[item['description'] for item in tasks if item['status'] == "Аlready"]
     @staticmethod
     def updateToId(id:int,status:str):
         tasks:List[dict[str,Any]] = []
