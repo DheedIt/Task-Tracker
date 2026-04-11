@@ -27,6 +27,33 @@ class Task:
             with open(path, 'w', encoding='utf-8') as file:
                 json.dump(tasks, file, indent=4, ensure_ascii=False)
     @staticmethod
+    def listAllTasks():
+        tasks:List[dict[str,Any]] = []
+        if(BASE_DIR.exists()):
+            with open(path, 'r', encoding='utf-8') as file:
+                try:
+                    tasks = json.load(file)
+                except json.JSONDecodeError:
+                    print("Ошибка чтения!")
+                    return
+            allTasks = [item.get("description") for item in tasks if "description" in item]
+            print(allTasks)
+
+    @staticmethod
+    def listCompletingTask():
+        tasks:List[dict[str,Any]] = []
+        if(BASE_DIR.exists()):
+            with open(path, 'r', encoding='utf-8') as file:
+                try:
+                    tasks = json.load(file)
+                except json.JSONDecodeError:
+                    print("Ошибка чтения!")
+                    return
+            print(tasks)
+            allTasks = [item['description'] for item in tasks if item['status'] == "Аlready"]
+            print(allTasks)
+
+    @staticmethod
     def updateToId(id:int,status:str):
         tasks:List[dict[str,Any]] = []
         if(BASE_DIR.exists()):
@@ -42,6 +69,7 @@ class Task:
                 print(tasks)
                 print(f"Обновили объект под номером{id}")
                 item['status'] = status
+                item['updateAt'] = date.today
                 print(f"Обновили на {status}")
                 print(tasks)
                 with open(path, 'w', encoding='utf-8') as file:
