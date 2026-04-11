@@ -1,14 +1,14 @@
-from typing import Any, List
+from typing import  List
 from src.entity.task import Task
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
 
 def inputProcessor(args:List[str]) -> None:
- options: dict[str, Any] = {
+ options = {
   "add": lambda: add(args[1:]),
-  "update": lambda: update(args[2]),
-  "delete": lambda: delete(args[2]),
+  #"update": lambda: update(args[1:]),
+  "delete": lambda: delete(args[1:]),
   "list": lambda: list(),
   "mark-in-progress": lambda: markIP(args[2]),
   "mark-done": lambda: markD(args[2])
@@ -27,15 +27,19 @@ def add(name: List[str]):
  return res
  
 
-def update(id: str, ):
- res = Task(1,id)
- print("Обновился")
+#def update(name: List[str]):
+ fullName:str = " ".join(name)
+ res = Task(Task.getLastId()+1,fullName)
+ res.save()
+ print(List[1])
  return res
 
-def delete(id: str):
- res = Task(1,id)
- print("удалил")
- return res
+def delete(id: List[str]):
+ idTDelete = id[0]
+ Task.deleteToId(idTDelete) 
+ print("Зашли в делейт")
+ res2 = Task(0,"sdawda")
+ return res2
 
 def list():
  res = Task(1, " ")

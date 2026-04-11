@@ -26,6 +26,38 @@ class Task:
             tasks.append(self.to_dict())
             with open(path, 'w', encoding='utf-8') as file:
                 json.dump(tasks, file, indent=4, ensure_ascii=False)
+
+    
+
+    #def update(self):
+        #if(BASE_DIR.exists()):
+           # with open(path, 'r', encoding='utf-8') as file:
+              #  try:
+                #    tasks = json.load(file)
+              #  except json.JSONDecodeError:
+             #       print("Ошибка чтения!")
+             #       return
+           # print(tasks)
+          #  with open(path, 'w', encoding='utf-8') as file:
+           #     json.dump(tasks, file, indent=4, ensure_ascii=False)
+    @staticmethod
+    def deleteToId(id:str):
+        tasks:List[dict[str,Any]] = []
+        if(BASE_DIR.exists()):
+            with open(path, 'r', encoding='utf-8') as file:
+                try:
+                    tasks = json.load(file)
+                except json.JSONDecodeError:
+                    print("Ошибка чтения!")
+                    return
+            tasks = [item for item in tasks if item['id'] != int(f"{id}")]
+            print(f"Taska{tasks} ")
+            print(f"Удалили под номером{id} ")
+            with open(path, 'w', encoding='utf-8') as file:
+                json.dump(tasks, file, indent=4, ensure_ascii=False)
+                
+                return tasks
+
     @staticmethod
     def getLastId() -> int:
         id:int = -1
@@ -52,3 +84,5 @@ class Task:
             "createdAt": str(self.createdAt),
             "updateAt": str(self.updateAt)
         }
+    
+  
