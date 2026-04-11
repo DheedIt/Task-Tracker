@@ -69,6 +69,7 @@ class Task:
 #[item['description'] for item in tasks if item['status'] == "Аlready"]
     @staticmethod
     def updateToId(id:int,status:str):
+        DT = str(date.today())
         tasks:List[dict[str,Any]] = []
         if(BASE_DIR.exists()):
             with open(path, 'r', encoding='utf-8') as file:
@@ -83,12 +84,13 @@ class Task:
                 print(tasks)
                 print(f"Обновили объект под номером{id}")
                 item['status'] = status
-                item['updateAt'] = date.today
+                item['updateAt'] = DT
                 print(f"Обновили на {status}")
                 print(tasks)
-                with open(path, 'w', encoding='utf-8') as file:
-                    json.dump(tasks, file, indent=4, ensure_ascii=False)
                 break
+        with open(path, 'w', encoding='utf-8') as file:
+                    json.dump(tasks, file, indent=4, ensure_ascii=False)
+        
             
 
 
