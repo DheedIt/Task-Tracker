@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent
 def inputProcessor(args:List[str]) -> None:
  options = {
   "add": lambda: add(args[1:]),
-  #"update": lambda: update(args[1:]),
+  "update": lambda: update(args[1:]),
   "delete": lambda: delete(args[1:]),
   "list": lambda: list(),
   "mark-in-progress": lambda: markIP(args[2]),
@@ -27,12 +27,14 @@ def add(name: List[str]):
  return res
  
 
-#def update(name: List[str]):
- fullName:str = " ".join(name)
- res = Task(Task.getLastId()+1,fullName)
- res.save()
- print(List[1])
- return res
+def update(argAll: List[str]):
+ idToUpdate = int(argAll[0])
+ statusUpdateVal = argAll[1]
+ print(idToUpdate)
+ print(statusUpdateVal)
+ Task.updateToId(idToUpdate, statusUpdateVal)
+ res2 = Task(0,"sdawda")
+ return res2
 
 def delete(id: List[str]):
  idTDelete = id[0]

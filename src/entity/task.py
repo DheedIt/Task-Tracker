@@ -26,20 +26,30 @@ class Task:
             tasks.append(self.to_dict())
             with open(path, 'w', encoding='utf-8') as file:
                 json.dump(tasks, file, indent=4, ensure_ascii=False)
+    @staticmethod
+    def updateToId(id:int,status:str):
+        tasks:List[dict[str,Any]] = []
+        if(BASE_DIR.exists()):
+            with open(path, 'r', encoding='utf-8') as file:
+                try:
+                    tasks = json.load(file)
+                except json.JSONDecodeError:
+                    print("Ошибка чтения!")
+                    return
 
-    
+        for item in tasks:
+            if item.get("id") == id:
+                print(tasks)
+                print(f"Обновили объект под номером{id}")
+                item['status'] = status
+                print(f"Обновили на {status}")
+                print(tasks)
+                with open(path, 'w', encoding='utf-8') as file:
+                    json.dump(tasks, file, indent=4, ensure_ascii=False)
+                break
+            
 
-    #def update(self):
-        #if(BASE_DIR.exists()):
-           # with open(path, 'r', encoding='utf-8') as file:
-              #  try:
-                #    tasks = json.load(file)
-              #  except json.JSONDecodeError:
-             #       print("Ошибка чтения!")
-             #       return
-           # print(tasks)
-          #  with open(path, 'w', encoding='utf-8') as file:
-           #     json.dump(tasks, file, indent=4, ensure_ascii=False)
+
     @staticmethod
     def deleteToId(id:str):
         tasks:List[dict[str,Any]] = []
