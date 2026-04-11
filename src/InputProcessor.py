@@ -29,7 +29,7 @@ def add(name: List[str]):
 
 def update(argAll: List[str]):
  idToUpdate = int(argAll[0])
- statusUpdateVal = argAll[1]
+ statusUpdateVal = " ".join(argAll[1:])
  print(idToUpdate)
  print(statusUpdateVal)
  Task.updateToId(idToUpdate, statusUpdateVal)
