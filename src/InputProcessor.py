@@ -4,7 +4,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
 
-def inputProcessor(args:List[str]) -> None:
+def inputProcessor(args:List[str]):
  options = {
   "add": lambda: add(args[1:]),
   "update": lambda: update(args[1:]),
@@ -24,8 +24,6 @@ def add(name: List[str]):
  fullName:str = " ".join(name)
  res = Task(Task.getLastId()+1,fullName)
  res.save()
- return res
- 
 
 def update(argAll: List[str]):
  idToUpdate = int(argAll[0])
@@ -33,32 +31,26 @@ def update(argAll: List[str]):
  print(idToUpdate)
  print(statusUpdateVal)
  Task.updateToId(idToUpdate, statusUpdateVal)
- res2 = Task(0,"")
- return res2
 
 def delete(id: List[str]):
+ if(id.__len__() < 1):
+  print("id balbec")
+  return
  idTDelete = id[0]
- Task.deleteToId(idTDelete) 
+ Task.deleteToId(idTDelete)
  print("Зашли в делейт")
- res2 = Task(0,"")
- return res2
 
 def list():
  Task.listAllTasks()
- res = Task(1, " ")
  print("Лист")
- return res
 
 def markIP():
  Task.listInProgres()
- res = Task(1,"")
  print("mark-in-progres")
- return res
 
 def markD():
  Task.listCompletingTask()
- res = Task(1, "")
  print("mark-done")
- return res
+
 
 
