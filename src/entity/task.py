@@ -26,6 +26,7 @@ class Task:
             tasks.append(self.to_dict())
             with open(path, 'w', encoding='utf-8') as file:
                 json.dump(tasks, file, indent=4, ensure_ascii=False)
+                print(*tasks, sep =', ')
     @staticmethod
     def listAllTasks():
         tasks:List[dict[str,Any]] = []
@@ -40,7 +41,8 @@ class Task:
             print(allTasks)
 
     @staticmethod
-    def listInProgres():
+    def ChangeStat(id:int, chStat:str):
+        DT = str(date.today())
         tasks:List[dict[str,Any]] = []
         if(BASE_DIR.exists()):
             with open(path, 'r', encoding='utf-8') as file:
@@ -50,8 +52,18 @@ class Task:
                     print("Ошибка чтения!")
                     return
             print(tasks)
-            allTasks = [item.get("description") for item in tasks if "description" in item and item.get("status") != "Already"]
-            print(allTasks)
+            for item in tasks:
+                if item.get("id") == id:
+                    print(tasks)
+                    print(f"Обновили объект под номером{id}")
+                    item['status'] = chStat
+                    item['updateAt'] = DT
+                    print(f"Обновили на {chStat}")
+                    print(tasks)
+                    break
+            with open(path, 'w', encoding='utf-8') as file:
+                    json.dump(tasks, file, indent=4, ensure_ascii=False)
+                    
 
     @staticmethod
     def listCompletingTask():
@@ -83,7 +95,7 @@ class Task:
             if item.get("id") == id:
                 print(tasks)
                 print(f"Обновили объект под номером{id}")
-                item['status'] = status
+                item['description'] = status
                 item['updateAt'] = DT
                 print(f"Обновили на {status}")
                 print(tasks)

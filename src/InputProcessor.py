@@ -10,7 +10,7 @@ def inputProcessor(args:List[str]):
   "update": lambda: update(args[1:]),
   "delete": lambda: delete(args[1:]),
   "list": lambda: list(),
-  "markIP": lambda: markIP(),
+  "markIP": lambda: markIP(args[1:]),
   "markDone": lambda: markD()
  }
  if(len(args) == 0):
@@ -44,8 +44,10 @@ def list():
  Task.listAllTasks()
  print("Лист")
 
-def markIP():
- Task.listInProgres()
+def markIP(argAll: List[str]):
+ idChangeStat = int(argAll[0])
+ ChangeStat = argAll[1]
+ Task.ChangeStat( idChangeStat, ChangeStat)
  print("mark-in-progres")
 
 def markD():
