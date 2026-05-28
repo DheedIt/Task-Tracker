@@ -41,8 +41,13 @@ class Task:
             print(allTasks)
 
     @staticmethod
-    def ChangeStat(id:int, chStat:str):
+    def ChangeStat(id:int,chStat:str):
         DT = str(date.today())
+        if(chStat=="markIP"):
+            status:str ="В процессе"
+        else:
+            status:str ="Готово "
+            
         tasks:List[dict[str,Any]] = []
         if(BASE_DIR.exists()):
             with open(path, 'r', encoding='utf-8') as file:
@@ -56,7 +61,7 @@ class Task:
                 if item.get("id") == id:
                     print(tasks)
                     print(f"Обновили объект под номером{id}")
-                    item['status'] = chStat
+                    item['status'] = status
                     item['updateAt'] = DT
                     print(f"Обновили на {chStat}")
                     print(tasks)

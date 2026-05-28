@@ -11,13 +11,13 @@ def inputProcessor(args:List[str]):
   "delete": lambda: delete(args[1:]),
   "list": lambda: list(),
   "markIP": lambda: markIP(args[1:]),
-  "markDone": lambda: markD()
+  "markDone": lambda: markD(args[1:])
  }
  if(len(args) == 0):
   print('Нет аргументов!')
   return
 
- handler = options.get(args[0], lambda: print('Балбес'))
+ handler = options.get(args[0], lambda: print('Балбес 1'))
  handler()
 
 def add(name: List[str]):
@@ -45,13 +45,15 @@ def list():
  print("Лист")
 
 def markIP(argAll: List[str]):
- idChangeStat = int(argAll[0])
- ChangeStat = argAll[1]
- Task.ChangeStat( idChangeStat, ChangeStat)
+ idToStatus = int(argAll[0])
+ ChangeStat = "markIP"
+ Task.ChangeStat(idToStatus,ChangeStat)
  print("mark-in-progres")
 
-def markD():
- Task.listCompletingTask()
+def markD(argAll: List[str]):
+ idToStatus = int(argAll[0])
+ ChangeStat = "markD"
+ Task.ChangeStat(idToStatus,ChangeStat)
  print("mark-done")
 
 
