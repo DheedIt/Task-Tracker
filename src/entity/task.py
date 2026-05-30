@@ -107,9 +107,6 @@ class Task:
                 break
         with open(path, 'w', encoding='utf-8') as file:
                     json.dump(tasks, file, indent=4, ensure_ascii=False)
-        
-            
-
 
     @staticmethod
     def deleteToId(id:str):
@@ -125,8 +122,7 @@ class Task:
             print(f"Taska{tasks} ")
             print(f"Удалили под номером{id} ")
             with open(path, 'w', encoding='utf-8') as file:
-                json.dump(tasks, file, indent=4, ensure_ascii=False)
-                
+                json.dump(tasks, file, indent=4, ensure_ascii=False)  
                 return tasks
 
     @staticmethod
@@ -137,7 +133,6 @@ class Task:
                 data: List[dict[str,Any]] = json.load(file)
                 if not data:
                     return 1
-            
                 item:str = data[-1].get('id', "-1")
                 id: int = int(item)
                 if(id == -1):
@@ -145,7 +140,7 @@ class Task:
                 return id
         except:
             print('Ошибка преобразования id из str в int')
-        return id #Тут ошибка что отсутствует id. Найди способ вытащить его
+        return id 
     
     def to_dict(self) -> dict[str,Any]:
         return {
