@@ -23,7 +23,8 @@ def inputProcessor(args:List[str]):
 def add(name: List[str]):
  fullName:str = " ".join(name)
  res = Task(Task.getLastId()+1,fullName)
- res.save()
+ printTasks = res.save()
+ print(printTasks, sep =', ')
 
 def update(argAll: List[str]):
  idToUpdate = int(argAll[0])

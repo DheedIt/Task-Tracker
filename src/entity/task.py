@@ -25,8 +25,9 @@ class Task:
                     return
             tasks.append(self.to_dict())
             with open(path, 'w', encoding='utf-8') as file:
-                json.dump(tasks, file, indent=4, ensure_ascii=False)
-                print(*tasks, sep =', ')
+                json.dump(tasks, file, indent=4, ensure_ascii=False)               
+            return tasks
+        
     @staticmethod
     def listAllTasks():
         tasks:List[dict[str,Any]] = []
